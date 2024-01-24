@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs')%>
+    <div id="iteminfo">
+        <p>Item Title : <%= story.title%></p>
+        <p>Item Category : <%= story.category%></p>
+        <p>Item Details : <%= story.details%></p>
+        <p>Item Status : <%= story.status%></p>
+        <img id="itemimage" alt="<%= story.title%>" src="<%= story.imageurl%>">
+        <%if(user == story.author._id){%>
+        <form>
+            <button class="buttons" type = "submit" formmethod = "GET" formaction = "/trades/<%= story._id%>/edit">Edit</button>
+            <button class="buttons" formmethod="POST" formaction="/trades/<%= story._id%>?_method=DELETE" type="submit">DELETE</button>
+        </form>
+        <%}%> 
+        <%if(!(user== story.author._id)){%>
+        <%if(story.Saved===false){%>
+            <form action="/trades/<%= story.id%>/save" method="post">
+              <label for="Name"></label><br />
+              <input type="hidden" id="title" name="Name" value="<%= story.title%>"required/>
+              <button type="submit" class="watch-button" id="save">Watch</button>
+            </form>
+          <%}else{%>
+            <form
+            action="/trades/<%= story._id%>/savedelete?_method=delete"
+            method="post">
+            <button type="submit" class="watch-button"> UnWatch </button>
+          </form>
+          <%}%>
+          <%}%>
+            
+        <%if(!(user== story.author._id)&&story.status=="Available"){%>
+            <form action="/trades/<%= story.id%>/trade" method="get">
+              <button class = "trade-button" type="submit" class="trade-buttons">Trade</button>
+            </form>
+            <%}%>
+</div>
+<%- include('../partials/footer.ejs')%>

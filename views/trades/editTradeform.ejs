@@ -1,0 +1,25 @@
+<%-include('../partials/header.ejs')%>
+<div class = "container">
+  <form class= "tforms" method="post" action="/trades/<%=story._id%>?_method=PUT">
+    <h2> Merchandise Trading Edit Form </h2>
+    <div class = "trade-forms">
+          <label for= "title"> Title </label>
+            <input type = "text" id= "title" name = "title" value = "<%= story.title%>" > <br><br>
+          <!-- <input type = "text" id= "title" name = "title" value =  "<%= story.title%>"> <br><br> -->
+    </div>
+    <div class = "trade-forms">
+            <label for= "category"> Category </label>
+            <input type = "text" id= "category" name = "category" value = "<%= story.category%>" required> <br><br>
+      </div>
+      <div class = "trade-forms">
+        <label for= "details"> Description </label>
+        <textarea id= "details" name = "details"  required minlength="10"> <%= story.details%> </textarea> <br><br>
+  </div>
+     <div class = "trade-forms">
+        <label for= "imageurl"> Image URL </label>
+        <input type = "url" id= "imageurl" name = "imageurl" value = "<%= story.imageurl%>" required> <br><br>
+   </div>
+       <button class= "buttons" type = "Submit">Update Item</button>
+  </form>
+</div>
+<%-include('../partials/footer.ejs')%>

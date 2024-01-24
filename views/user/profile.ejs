@@ -1,0 +1,113 @@
+
+<%- include('../partials/header.ejs')%>
+<div class = "falshmsg">
+    <div class = "innerlist">
+    <h2>Welcome, <%= user.firstName%></h2>
+    <% if(stories.length){ %>
+        <table class="trades-table">
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <%stories.forEach(story=>{%>
+            <tr>
+              <td>
+                <a href="/trades/<%= story.id %>"> <span><%= story.title%></span> </a>
+              </td>
+              <td><%= story.category%></td>
+              <td><%= story.status%></td>
+              <td>
+                <div class="function-buttons-profile">
+                  <form action="/trades/<%= story.id%>/edit" method="get">
+                    <button class = "profile-button-updt"  type="submit">Update</button>
+                  </form>
+                  <form action="/trades/<%= story.id%>?_method=delete" method="post">
+                    <button class = "profile-button-del"  type="submit">Delete</button>
+                  </form>
+                  <%if(story.status==="Offer Pending"){%>
+                  <form action="/trades/<%= story.id%>/manage" method="get">
+                    <button class="mnfoffer-button" type="submit">ManageOffer</button>
+                  </form>
+                  <%}%>
+                </div>
+              </td>
+            </tr>
+            <br/>
+            <%});%>
+          </table>
+          <%}else{%>
+        <p>No trades are created to display</p>
+    <%}%>
+     
+    <p><b>Your Watchlist:</b></p>
+    <%if(saves.length){%> 
+  <table class="watch-table">
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <%let names = new Array();%> 
+      <%saves.forEach(save=>{%>
+      <%names.push(save.title);%> <%});%>  <%saved.forEach(story=>{%>
+        <%if(names.includes(story.title)){%>
+      <td>
+        <a href="/trades/<%= story.id%>"><p><%= story.title%></p></a>
+      </td>
+      <td><p><%= story.category%></p></td>
+      <td><p><%= story.status%></p></td>
+      <td>
+        <form
+          action="/trades/<%= story.id%>/savedelete?_method=delete"
+          method="post">
+          <button type="submit" class="function-buttons">UnWatch</button>
+        </form>
+      </td>
+    </tr>
+  <%}%> 
+  <%})%> 
+</table>
+  <%}else{%>
+  <p>No trades added to Watchlist.</p>
+  <%};%>
+
+  <p><b>Your Offers:</b></p>
+  <%if(offers.length){%> 
+  <table class="offers-table">
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <%let names = new Array();%>
+  <%offers.forEach(offer=>{%> <%names.push(offer.title);%> <%});%>
+  <%offered.forEach(story=>{%> <%if(names.includes(story.title)){%>
+      <td>
+        <a href="/trades/<%= story.id%>"><p><%= story.title%></p></a>
+      </td>
+      <td><p><%= story.category%></p></td>
+      <td><p><%= story.status%></p></td>
+      <td>
+        <form
+          action="/trades/<%= story.id%>/deleteoffer?_method=delete"
+          method="post">
+          <button type="submit" class="function-buttons">Cancel Offer</button>
+        </form>
+      </td>
+    </tr>
+  <%}%> 
+  <%})%> 
+</table>
+  <%}else{%>
+  <p>No offers created</p>
+  <%};%>
+
+    </div>
+</div>
+    <%- include('../partials/footer.ejs')%>

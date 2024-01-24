@@ -1,0 +1,34 @@
+<%- include('../partials/header.ejs')%>
+<div id="itemtrade-page">
+  <h2 class = "mytrades" >Your Trades</h2>
+  <%if(items.length){%>
+  <table class="trade-swp-lst">
+    <tr>
+      <th> Title</Title></th>
+      <th>Category</th>
+      <th>Status</th>
+    </tr>
+    <%items.forEach(item=>{%>
+    <tr>
+      <td>
+        <a href="/trades/<%= item.id%>"> <span><%= item.title%></span> </a>
+      </td>
+      <td><%= item.category%></td>
+      <td><%= item.status%></td>
+      <%if(item.status==="Available"){%>
+      <td>
+        <form action="/trades/<%= item.id%>/tradeitem" method="get">
+          <button type="submit" class="trade-buttons">Trade Item</button>
+        </form>
+      </td>
+      <%}%>
+    </tr>
+    <br />
+    <%});%>
+  </table>
+  <br />
+  <%}else{%>
+  <p>You haven't created any trades yet.</p>
+  <%};%>
+</div>
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,26 @@
+    <%-include('../partials/header.ejs')%>
+          <div class = "container">
+            <form class= "tforms" action ='/trades' method = 'POST'>
+              <div class = "trade-forms">
+                    <label for= "category"> Category </label>
+                    <input type = "text" id= "category" name = "category" placeholder= "Enter category" > <br><br>
+              </div>
+              <div class = "trade-forms">
+                    <label class="sup" for= "title"> Title </label>
+                    <input type = "text" id= "title" name = "title" placeholder= "Enter Name"> <br><br>
+              </div>
+               <div class = "trade-forms">
+                    <label for= "details"> Description </label>
+                    <textarea id= "details" name = "details" placeholder= "Details" > </textarea> <br><br>
+               </div>
+               <div class = "trade-forms">
+                  <label for= "imageurl"> Image URL </label>
+                  <input type = "url" id= "imageurl" name = "imageurl" placeholder= "Image URL"> <br><br>
+             </div>
+                  <button type = "Submit">Create Trade</button>
+            </form>
+          </div>
+    <%-include('../partials/footer.ejs')%>
+
+
+   

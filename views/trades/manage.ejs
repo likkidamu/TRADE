@@ -1,0 +1,23 @@
+<%- include('../partials/header.ejs')%>
+<div class="manage">
+  <h2 class ="colouring" >Trade Manage</h2>
+  <table class="manageoffr-table" >
+    <tr>
+      <th>Offer For You</th>
+      <th>Your Trade</th>
+    </tr>
+    <tr>
+      <td> <a href="/trades/<%= item.id%>"> <%= item.title%></a> </td>
+      <td> <a href="/"> <%= item.offerItem%></td> </a>
+    </tr>
+  </table>
+  <div id = "form">
+    <form action="/trades/<%= item.id%>/accept" method="get">
+    <button class = "offraccept-button" type="submit">Accept</button>
+  </form>
+  <form action="/trades/<%= item.id%>/reject" method="get">
+    <button class = "offrreject-button" type="submit">Reject</button>
+  </form>
+</div>
+</div>
+<%- include('../partials/footer.ejs')%>

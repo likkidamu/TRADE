@@ -1,0 +1,24 @@
+<%-include('../partials/header.ejs')%>
+    <div class = "container" >
+                <div id = "content" >
+                    <%if(stories.length){%>
+                        <h2 id = "select">Select an item</h2>
+                        <%let TradeSet = new Set();%> 
+                        <%for(var i = 0; i<stories.length;i++){%>
+                         <%TradeSet.add(stories[i].category);%>
+                        <%}%>
+                        <%let categorylist = Array.from(TradeSet);%>
+                        <%for(var i = 0;i<categorylist.length;i++){%>
+                           <h3><%= categorylist[i]%></h3>
+                         <%for(var j=0;j<stories.length;j++){%>
+                           <%if(stories[j].category === categorylist[i]){%>
+                            <a class= "tradestyle" href="/trades/<%= stories[j]._id%>"><p><%= stories[j].title%></p></a>
+                           <%}%>
+                         <%}%>
+                       <%}%>
+                           <%}else{%>
+                           <p>There are no trade items to display</p>
+                           <%}%>            
+        </div>
+     </div>
+<%-include('../partials/footer.ejs')%>
